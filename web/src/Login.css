@@ -1,0 +1,165 @@
+.login-page-container {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding: 0 16px;
+    transition: background-color 1s;
+}
+
+.login-page-container.success {
+    background-color: #0d2217;
+
+    animation: fade-out 3.5s linear infinite;
+}
+
+.login-page-container.error {
+    background-color: #441117;
+}
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 25vh;
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0d1117;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-page-container.success form {
+    animation: aura 3s linear infinite;
+}
+
+@keyframes aura {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2);
+    }
+
+    60% {
+        box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes fade-out {
+    80% {
+       opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+button {
+    padding: 0.5rem 2rem;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0069d9;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.spinner-icon {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 0.2rem solid #fff;
+    border-top-color: #007bff;
+    animation: spinner-animation 0.6s linear infinite;
+}
+
+.success-icon::before {
+    content: '\2713';
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    color: green;
+    animation: state-animation .8s linear;
+}
+
+.success-icon.big::before {
+    font-size: 4em;
+    font-weight: 700;
+}
+
+.error-icon::before {
+    content: '\2715';
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    color: red;
+    animation: state-animation .8s linear;
+}
+
+.error-icon.big::before {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+@keyframes spinner-animation {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes state-animation {
+    0% {
+        opacity: 0;
+        transform: rotate(-90deg) scale(.2);
+    }
+
+    60% {
+        opacity: 1;
+        transform: rotate(400deg) scale(1.2);
+    }
+
+    80% {
+        transform: rotate(400deg) scale(1.2);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}

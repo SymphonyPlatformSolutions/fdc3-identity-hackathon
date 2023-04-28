@@ -1,0 +1,28 @@
+rootProject.name = 'finos-hackathon'
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version('jjwt', '0.11.5')
+
+            library('lombok', 'org.projectlombok:lombok:1.18.26')
+            library('jjwt', 'io.jsonwebtoken', 'jjwt-api').versionRef('jjwt')
+            library('jjwtImpl', 'io.jsonwebtoken', 'jjwt-impl').versionRef('jjwt')
+            library('jjwtJackson', 'io.jsonwebtoken', 'jjwt-jackson').versionRef('jjwt')
+
+            plugin('springboot', 'org.springframework.boot').version('3.0.6')
+            plugin('springboot-bom', 'io.spring.dependency-management').version('1.1.0')
+            plugin('lombok', 'io.freefair.lombok').version('8.0.1')
+            plugin('ratpack', 'io.ratpack.ratpack-java').version('2.0.0-rc-1')
+        }
+
+        testLibs {
+            version('junit5', '5.9.1')
+            library('junit-api', 'org.junit.jupiter', 'junit-jupiter-api').versionRef('junit5')
+            library('junit-engine', 'org.junit.jupiter', 'junit-jupiter-engine').versionRef('junit5')
+            library('assertj', 'org.assertj:assertj-core:3.23.1')
+
+            bundle('junit', ['junit-api', 'junit-engine', 'assertj'])
+        }
+    }
+}

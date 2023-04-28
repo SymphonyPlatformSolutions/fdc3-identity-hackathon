@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fdc3-identity-hackathon
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: fdc3-identity-hackathon
+    spec:
+      containers:
+        - image: ghcr.io/symphonyplatformsolutions/fdc3-hackathon:latest
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 35
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          name: fdc3-hackathon
+          ports:
+            - containerPort: 8080
+              name: fdc3
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 35
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 5

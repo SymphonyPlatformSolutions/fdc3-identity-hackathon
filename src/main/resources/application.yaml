@@ -1,0 +1,26 @@
+app:
+  pod-uri: https://develop2.symphony.com
+
+server.servlet.contextPath: /fdc3
+spring.banner.location: classpath:finos-hackathon-banner.txt
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+logging:
+  level:
+    org.finos.hackathon: DEBUG
+    root: INFO

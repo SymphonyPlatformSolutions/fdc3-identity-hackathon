@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: labs-ingress
+spec:
+  rules:
+    - host: labs.symphonymarket.solutions
+      http:
+        paths:
+          - backend:
+              service:
+                name: fdc3-identity-hackathon
+                port:
+                  number: 8080
+            path: /fdc3/*
+            pathType: ImplementationSpecific
