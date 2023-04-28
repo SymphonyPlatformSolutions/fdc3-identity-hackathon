@@ -20,22 +20,22 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          distribution: corretto
+          distribution: temurin
           java-version: 17
 
       - uses: gradle/gradle-build-action@v2
         with:
-          arguments: botJar
+          arguments: build
 
       - uses: actions/cache/save@v3
         with:
           key: ${{ github.sha }}
-          path: lib
+          path: build/libs
 
       - uses: actions/cache/save@v3
         with:
-          key: fdc3-hackathon-${{ github.sha }}
-          path: workflow-bot-app.jar
+          key: finos-hackathon-${{ github.sha }}
+          path: build/libs/finos-hackathon*.jar
 
   release-to-dev2:
     needs: build
@@ -47,12 +47,12 @@ jobs:
       - uses: actions/cache/restore@v3
         with:
           key: ${{ github.sha }}
-          path: lib
+          path: build/libs
 
       - uses: actions/cache/restore@v3
         with:
-          key: fdc3-hackathon-${{ github.sha }}
-          path: workflow-bot-app.jar
+          key: finos-hackathon-${{ github.sha }}
+          path: build/libs/finos-hackathon*.jar
 
       - uses: docker/login-action@v2
         with:
@@ -72,7 +72,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ env.owner }}/wdk-studio:${{ steps.tag.outputs.new_tag }}
+          tags: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}
 
       - uses: google-github-actions/auth@v1
         with:
@@ -85,9 +85,9 @@ jobs:
 
       - env:
           DEPLOYMENT: ${{ github.event.repository.name }}
-          STUDIO_TAG: ghcr.io/${{ env.owner }}/wdk-studio:${{ steps.tag.outputs.new_tag }}
+          IMAGE_TAG: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}
         run: |
-          kubectl set image deployment/${DEPLOYMENT} studio=${STUDIO_TAG}
+          kubectl set image deployment/${DEPLOYMENT} fdc3-hackathon=${IMAGE_TAG}
           kubectl rollout status deployment/${DEPLOYMENT}
       - uses: ncipollo/release-action@v1
         with:
