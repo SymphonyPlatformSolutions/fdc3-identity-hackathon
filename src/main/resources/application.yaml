@@ -1,0 +1,31 @@
+server:
+  servlet:
+    contextPath: /fdc3
+  port: 8080
+
+spring:
+  banner:
+    location: classpath:finos-hackathon-banner.txt
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health
+  endpoint:
+    info:
+      enabled: true
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: false
+  server:
+    port: 8081
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss,SSS}Z %-5level [%t] %C{-15}: %m %n%xEx"
+  level:
+    org.finos.hackathon: DEBUG
+    root: INFO
