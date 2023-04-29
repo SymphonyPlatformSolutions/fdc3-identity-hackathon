@@ -73,7 +73,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}
+          tags: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}, ghcr.io/${{ env.owner }}/fdc3-hackathon:latest
 
       - uses: google-github-actions/auth@v1
         with:
@@ -86,11 +86,12 @@ jobs:
 
       - env:
           DEPLOYMENT: ${{ github.event.repository.name }}
-          IMAGE_TAG: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}
+          IMAGE_TAG: ghcr.io/${{ env.owner }}/fdc3-hackathon:latest
         run: |
           kubectl set image deployment/${DEPLOYMENT} fdc3-hackathon=${IMAGE_TAG}
           kubectl rollout status deployment/${DEPLOYMENT}
       - uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag.outputs.new_tag }}
+          makeLatest: true
           generateReleaseNotes: true

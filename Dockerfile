@@ -15,19 +15,20 @@ RUN jdeps \
 # Create custom JRE
 RUN mkdir custom
 RUN jlink \
-    --add-modules $(cat jre-deps.info) \
     --output custom/jre \
     --no-header-files \
     --no-man-pages \
     --compress=2 \
-    --strip-java-debug-attributes
+    --strip-java-debug-attributes \
+    --add-modules $(cat jre-deps.info),java.xml,jdk.unsupported,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument
+
 
 FROM alpine:latest
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 WORKDIR /deployment
 
-COPY --from=builder /app/custom/jre /custom/jre
+COPY --from=builder /app/custom/jre custom/jre
 COPY --from=builder /app/finos-hackathon.jar  finos-hackathon.jar
 
 ENTRYPOINT ["custom/jre/bin/java", "-jar", "finos-hackathon.jar"]
