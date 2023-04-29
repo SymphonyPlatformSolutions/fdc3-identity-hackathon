@@ -17,3 +17,7 @@ Response
   - 200: jwt is valid
   - 400: jwt is not valid, bad request
   - 500: server error
+
+## Deployment
+Each push will trigger the github action, the new generated docker image is
+going to be deployed on GCP under platform solutions project, labs kub cluster.
