@@ -2,7 +2,8 @@ name: Build and Release
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - master
 
 jobs:
   build:
@@ -10,13 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'yarn'
-          cache-dependency-path: web/yarn.lock
-
-      - run: cd web && yarn install && yarn build && cp -r dist ../src/main/resources/static/
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: 18
+#          cache: 'yarn'
+#          cache-dependency-path: web/yarn.lock
+#
+#      - run: cd web && yarn install && yarn build && cp -r dist ../src/main/resources/static/
 
       - uses: actions/setup-java@v3
         with:
