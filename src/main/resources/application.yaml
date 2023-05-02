@@ -16,8 +16,6 @@ management:
       enabled: true
     readinessstate:
       enabled: true
-  server:
-    port: 8081
 
 logging:
   level:
