@@ -18,14 +18,25 @@ function Login({ onSuccess }) {
   const [state, setState] = useState();
   const [errorMessage, setErrorMessage] = useState();
 
+  const handleError = (err) => {
+    const message = err?.toString?.();
+    if (message) {
+      console.error(message);
+      setErrorMessage(message);
+    }
+  }
+
   const getSymphonyIdentity = async () => {
+    setState(States.FETCH_IDENTITY_SYMPHONY);
+
     try {
-      setState(States.FETCH_IDENTITY_SYMPHONY);
+      console.log("Raising GetIdentity intent...");
       const resolution = await window.fdc3.raiseIntent("GetIdentity", { type: "fdc3.get.identity" });
       const result = await resolution.getResult();
+      console.log("Intent response received:", JSON.stringify(result));
       return result.jwt;
     } catch (error) {
-      // setErrorMessage(error.toString());
+      // handleError(error);
 
       // TODO: remove once Sym is ready to handle GetIdentity
       return MOCK_JWT;
@@ -33,8 +44,9 @@ function Login({ onSuccess }) {
   }
 
   const validateJwt = (jwt) => {
-    setState(States.VALIDATE_IDENTITY)
+    setState(States.VALIDATE_IDENTITY);
 
+    console.log("Validating user identity...");
     return fetch(VALIDATE_TOKEN_URL, {
       method: 'POST',
       headers: {
@@ -47,7 +59,12 @@ function Login({ onSuccess }) {
         throw new Error(response.statusText);
       }
       return response.json();
-    }).catch((error) => setErrorMessage(error.toString()));
+    })
+      .then((response) => {
+        console.log("Response received:", JSON.stringify(response));
+        return response;
+      })
+      .catch(handleError);
   }
 
 
