@@ -15,7 +15,7 @@ jobs:
           node-version: 18
           cache: 'yarn'
           cache-dependency-path: web/yarn.lock
-          registry-url: registry=https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org
 
       - run: cd web && yarn install && yarn build && cp -r dist ../src/main/resources/static/
 
