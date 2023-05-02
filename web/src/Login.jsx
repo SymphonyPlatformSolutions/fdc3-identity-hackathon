@@ -40,13 +40,13 @@ function Login({ onSuccess }) {
   }
 
   const onGetIdentity = async (payload) => {
-    const validatedJwt = await validateJwt(payload.jwt);
+    const userInfo = await validateJwt(payload.jwt);
 
     if (validatedJwt) {
       setState(States.SUCCESS);
 
       setTimeout(() => {
-        onSuccess(validateJwt);
+        onSuccess(userInfo);
       }, REDIRECTION_DELAY * 1000);
     }
   }

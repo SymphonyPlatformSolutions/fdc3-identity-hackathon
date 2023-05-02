@@ -3,13 +3,14 @@ import './App.css';
 import Login from './Login';
 
 function App() {
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [userContext, setUserContext] = useState();
 
+  // TODO: create a specific react component for the logged in user, based on the userContext info
   return (
     <div>
-      {!loginSuccess
-        ? (<Login onSuccess={() => setLoginSuccess(true)} />)
-        : (<>TODO</>)}
+      {!userContext
+        ? (<Login onSuccess={setUserContext} />)
+        : (<>{JSON.stringify(userContext)}</>)}
     </div>
   );
 }
