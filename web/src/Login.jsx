@@ -142,6 +142,10 @@ function Login({ onSuccess }) {
             </h3>
           )}
         </div>
+
+        {!!errorMessage && (
+          <button type="button" onClick={() => { setErrorMessage(undefined); setState(undefined) }}>Retry</button>
+        )}
       </div>
     </div>
   );
