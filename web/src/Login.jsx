@@ -20,6 +20,11 @@ function Login({ onSuccess }) {
   const [state, setState] = useState();
   const [errorMessage, setErrorMessage] = useState();
 
+  const handleStateError = (err) => {
+    setState(States.ERROR);
+    setErrorMessage(err.toString());
+  }
+
   const getSymphonyIdentity = async () => {
     try {
       setState(States.FETCH_IDENTITY_SYMPHONY);
@@ -27,11 +32,10 @@ function Login({ onSuccess }) {
       const result = await resolution.getResult();
       return result.jwt;
     } catch (error) {
-      setState(States.ERROR);
-      console.error(`${resolution.source} returned an error: ${error}`);
-
       // TODO: remove once Sym is ready to handle GetIdentity
       return MOCK_JWT;
+
+      // handleStateError(error);
     }
   }
 
@@ -50,10 +54,7 @@ function Login({ onSuccess }) {
         throw new Error(response.statusText);
       }
       return response.json();
-    }).catch((error) => {
-      setState(States.ERROR);
-      setErrorMessage(error.toString());
-    })
+    }).catch(handleStateError);
   }
 
 
