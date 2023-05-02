@@ -34,6 +34,12 @@ function Login({ onSuccess }) {
       const resolution = await window.fdc3.raiseIntent("GetIdentity", { type: "fdc3.get.identity" });
       const result = await resolution.getResult();
       console.log("Intent response received:", JSON.stringify(result));
+
+      if (result?.jwt) {
+        return result.jwt;
+      } else {
+        handleError(new Error("The FDC3 intent response does not contain any jwt"));
+      }
       return result.jwt;
     } catch (error) {
       handleError(error);
@@ -71,7 +77,6 @@ function Login({ onSuccess }) {
     const jwt = await getSymphonyIdentity();
 
     if (!jwt) {
-      handleError(new Error("The FDC3 intent response does not contain any jwt"));
       return;
     }
 
