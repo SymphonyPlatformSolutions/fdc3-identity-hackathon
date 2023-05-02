@@ -35,12 +35,12 @@ function Login({ onSuccess }) {
       const result = await resolution.getResult();
       console.log("Intent response received:", JSON.stringify(result));
 
-      if (result?.jwt) {
-        return result.jwt;
-      } else {
-        handleError(new Error("The FDC3 intent response does not contain any jwt"));
+      if (!result?.jwt) {
+        throw new Error("The FDC3 intent response does not contain any jwt");
       }
+
       return result.jwt;
+
     } catch (error) {
       handleError(error);
     }
