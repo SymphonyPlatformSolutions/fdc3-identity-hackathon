@@ -13,7 +13,7 @@ const STATES = {
 // const SYMPHONY_POD_URL = "https://st3.symphony.com";
 const VALIDATE_TOKEN_URL = window.origin + "/validate";
 
-const REDIRECTION_DELAY = 3;
+const REDIRECTION_DELAY = 3; // s 
 
 function Login({ onSuccess }) {
   const [state, setState] = useState();
@@ -29,13 +29,13 @@ function Login({ onSuccess }) {
     const jwt = await getIdentityFromSymphony();
     const validatedJwt = await validateJwt(jwt);
 
-    if (validatedJwt) {
+    // if (validatedJwt) {
       setState(STATES.SUCCESS);
 
       setTimeout(() => {
         onSuccess(validateJwt);
-      }, REDIRECTION_DELAY);
-    }
+      }, REDIRECTION_DELAY * 1000);
+    // }
   }
 
   const getIdentityFromSymphony = () => {
