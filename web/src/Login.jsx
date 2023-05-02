@@ -36,10 +36,7 @@ function Login({ onSuccess }) {
       console.log("Intent response received:", JSON.stringify(result));
       return result.jwt;
     } catch (error) {
-      // handleError(error);
-
-      // TODO: remove once Sym is ready to handle GetIdentity
-      return MOCK_JWT;
+      handleError(error);
     }
   }
 
