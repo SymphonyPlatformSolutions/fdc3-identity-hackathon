@@ -1,5 +1,6 @@
 package org.finos.hackathon;
 
+import io.jsonwebtoken.Claims;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class Application {
 
   @PostMapping("/jwt")
-  public ResponseEntity<Void> validateJwt(@Valid @RequestBody JwtInfo jwtInfo) {
+  public ResponseEntity<Claims> validateJwt(@Valid @RequestBody JwtInfo jwtInfo) {
     log.debug("validate jwt");
-    JwtValidator.validateJwt(jwtInfo.jwt());
-    return ResponseEntity.ok().build();
+    Claims claims = JwtValidator.validateJwt(jwtInfo.jwt());
+    return ResponseEntity.ok().body(claims);
   }
 
   public static void main(String[] args) {

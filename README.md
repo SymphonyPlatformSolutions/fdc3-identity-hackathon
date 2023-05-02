@@ -14,7 +14,7 @@ POST /fdc3/v1/auth/jwt
 ```
 
 Response
-  - 200: jwt is valid
+  - 200: jwt is valid, with UserClaim payload
   - 400: jwt is not valid, bad request
   - 500: server error
 
