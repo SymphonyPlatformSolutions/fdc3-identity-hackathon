@@ -31,6 +31,7 @@ h1 {
 
 h3 {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
@@ -77,10 +78,10 @@ button:disabled {
 .success-icon::before {
     content: '\2713';
     display: inline-block;
-    font-size: 1rem;
+    font-size: 1.5rem;
     vertical-align: middle;
     color: green;
-    animation: success-animation 1s linear;
+    animation: state-animation .8s linear;
 }
 
 .success-icon.big::before {
@@ -91,10 +92,10 @@ button:disabled {
 .error-icon::before {
     content: '\2715';
     display: inline-block;
-    font-size: 1rem;
+    font-size: 1.5rem;
     vertical-align: middle;
     color: red;
-    animation: success-animation 1s linear;
+    animation: state-animation .8s linear;
 }
 
 .error-icon.big::before {
@@ -115,12 +116,14 @@ button:disabled {
     }
 }
 
-@keyframes success-animation {
+@keyframes state-animation {
     0% {
+        opacity: 0;
         transform: rotate(-90deg) scale(.2);
     }
 
     60% {
+        opacity: 1;
         transform: rotate(400deg) scale(1.2);
     }
 
