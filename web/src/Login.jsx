@@ -71,6 +71,7 @@ function Login({ onSuccess }) {
     const jwt = await getSymphonyIdentity();
 
     if (!jwt) {
+      handleError(new Error("The FDC3 intent response does not contain any jwt"));
       return;
     }
 
