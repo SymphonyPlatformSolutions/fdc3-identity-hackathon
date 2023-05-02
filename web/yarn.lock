@@ -320,6 +320,11 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.17.18.tgz#3a8e57153905308db357fd02f57c180ee3a0a1fa"
   integrity sha512-qU25Ma1I3NqTSHJUOKi9sAH1/Mzuvlke0ioMJRthLXKm7JiSKVwFghlGbDLOO2sARECGhja4xYfRAZNPAkooYg==
 
+"@finos/fdc3@^2.0.1":
+  version "2.0.1"
+  resolved "https://repo.symphony.com:443/artifactory/api/npm/npm-virtual-dev/@finos/fdc3/-/fdc3-2.0.1.tgz#553a367ced685f269233a89e9f9a505271556b97"
+  integrity sha512-BdfTPFQKYjwTaPNHavhwmA/be4+zg/4265DAx0DoasCjnlhvLA8WB9IIJZheXTYtevE3KvGNsFTo52yYzVF3Jg==
+
 "@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.3.tgz#7e02e6eb5df901aaedb08514203b096614024098"
@@ -423,6 +428,11 @@ chalk@^2.0.0:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
+
+classnames@^2.3.2:
+  version "2.3.2"
+  resolved "https://repo.symphony.com:443/artifactory/api/npm/npm-virtual-dev/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
 color-convert@^1.9.0:
   version "1.9.3"
