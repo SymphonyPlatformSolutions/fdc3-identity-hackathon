@@ -77,12 +77,37 @@ button:disabled {
 .success-icon::before {
     content: '\2713';
     display: inline-block;
-    font-size: 4em;
-    font-weight: 700;
+    font-size: 1rem;
     vertical-align: middle;
     color: green;
     animation: success-animation 1s linear;
 }
+
+.success-icon.big::before {
+    font-size: 4em;
+    font-weight: 700;
+}
+
+.error-icon::before {
+    content: '\2715';
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: middle;
+    color: red;
+    animation: success-animation 1s linear;
+}
+
+.error-icon.big::before {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 
 @keyframes spinner-animation {
     to {

@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./Login.css";
-import { DesktopAgent } from '@finos/fdc3';
 
 const MOCK_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0ZXN0IjoyfQ.dEHiqvpIWH7WDBumDsAcLoxf_CBVTIhPe0nwgag54Dp5H3NnHY_av0KyLh0pXyXF02TeNa_6v6Eb6sh6eHKv1EbWzd96btakFmoSQ3UYCIdsAq9OLj9xTbOVLvPUtdwsUPcUnCabTuUtGCwJzW1d6Sp9EBpL2KNZK2GhMwh29fEMsZmWOE2zydR8deujz-A3PFob4zeQgpP5EKQ5mKzwU7mvl9nStS7XqdcTJtztv5WRTyGDDuia3dO43nPTam61bdQL2nRE441i_tbiEuqnx4eom3CiTej0dusowTSVsl8m0t3m4kxjeDERpynhhZ842iigDY7GYjm62IC3riYA2g";
 
@@ -9,7 +8,6 @@ const States = {
   FETCH_IDENTITY_SYMPHONY: 1,
   VALIDATE_IDENTITY: 2,
   SUCCESS: 3,
-  ERROR: 4,
 }
 
 const VALIDATE_TOKEN_URL = window.origin + "/fdc3/v1/auth/jwt";
@@ -20,11 +18,6 @@ function Login({ onSuccess }) {
   const [state, setState] = useState();
   const [errorMessage, setErrorMessage] = useState();
 
-  const handleStateError = (err) => {
-    setState(States.ERROR);
-    setErrorMessage(err.toString());
-  }
-
   const getSymphonyIdentity = async () => {
     try {
       setState(States.FETCH_IDENTITY_SYMPHONY);
@@ -32,10 +25,10 @@ function Login({ onSuccess }) {
       const result = await resolution.getResult();
       return result.jwt;
     } catch (error) {
+      // setErrorMessage(error.toString());
+
       // TODO: remove once Sym is ready to handle GetIdentity
       return MOCK_JWT;
-
-      // handleStateError(error);
     }
   }
 
@@ -54,7 +47,7 @@ function Login({ onSuccess }) {
         throw new Error(response.statusText);
       }
       return response.json();
-    }).catch(handleStateError);
+    }).catch((error) => setErrorMessage(error.toString()));
   }
 
 
@@ -78,37 +71,58 @@ function Login({ onSuccess }) {
     }
   }
 
+  const renderStateIcon = (targetState) => {
+    if (state === targetState) {
+      if (!!errorMessage) {
+        return <div className="error-icon" />
+      }
+      return <div className="spinner-icon" />
+    }
+    return <div className="success-icon" />
+  }
+
   return (
     <div className={classNames("login-page-container", {
       "success": state === States.SUCCESS,
-      "error": state === States.ERROR,
+      "error": !!errorMessage,
     })}>
       <div className='login-page'>
         <h1>Login with Symphony FDC3</h1>
         <form onSubmit={handleSubmit}>
 
-          {(!state || state < States.SUCCESS) && (
+          {(!errorMessage && (!state || state < States.SUCCESS)) && (
             <button type="submit" disabled={!!state}>
               {!!state ? (<div className="spinner-icon"></div>) : (<>Login</>)}
             </button>
           )}
 
           {state === States.SUCCESS && (
-            <div className="success-icon" />
+            <div className="success-icon big" />
           )}
 
-          {state === States.ERROR && (
-            <div>{errorMessage}</div>
+          {errorMessage && (
+            <div className="error-message">
+              <span className="error-icon big" />
+              {errorMessage}
+            </div>
           )}
         </form>
 
         <div className='login-info'>
-          {state === States.FETCH_IDENTITY_SYMPHONY && (<>
-            <h3><div className="spinner-icon"></div>Authenticating through Symphony FDC3...</h3>
-            <p>Please authorize the connection from your Symphony application</p>
-          </>)}
-          {state === States.VALIDATE_IDENTITY && (
-            <h3><div className="spinner-icon"></div>Validating Symphony identity...</h3>
+          {!!state && state >= States.FETCH_IDENTITY_SYMPHONY && (
+            <>
+              <h3>
+                {renderStateIcon(States.FETCH_IDENTITY_SYMPHONY)}
+                Authentication through Symphony FDC3
+              </h3>
+              {state === States.FETCH_IDENTITY_SYMPHONY && (<p>Please authorize the connection from your Symphony application</p>)}
+            </>
+          )}
+          {!!state && state >= States.VALIDATE_IDENTITY && (
+            <h3>
+              {renderStateIcon(States.VALIDATE_IDENTITY)}
+              Validation of Symphony identity
+            </h3>
           )}
         </div>
       </div>
