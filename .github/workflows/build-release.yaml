@@ -27,33 +27,6 @@ jobs:
         with:
           arguments: build
 
-      - uses: actions/cache/save@v3
-        with:
-          key: ${{ github.sha }}
-          path: build/libs
-
-      - uses: actions/cache/save@v3
-        with:
-          key: finos-hackathon-${{ github.sha }}
-          path: build/libs/finos-hackathon*.jar
-
-  release-to-dev2:
-    needs: build
-    runs-on: ubuntu-latest
-    environment: DEV2
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/cache/restore@v3
-        with:
-          key: ${{ github.sha }}
-          path: build/libs
-
-      - uses: actions/cache/restore@v3
-        with:
-          key: finos-hackathon-${{ github.sha }}
-          path: build/libs/finos-hackathon*.jar
-
       - uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -72,7 +45,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}, ghcr.io/${{ env.owner }}/fdc3-hackathon:latest
+          tags: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}
 
       - uses: google-github-actions/auth@v1
         with:
@@ -85,7 +58,7 @@ jobs:
 
       - env:
           DEPLOYMENT: ${{ github.event.repository.name }}
-          IMAGE_TAG: ghcr.io/${{ env.owner }}/fdc3-hackathon:latest
+          IMAGE_TAG: ghcr.io/${{ env.owner }}/fdc3-hackathon:${{ steps.tag.outputs.new_tag }}
         run: |
           kubectl set image deployment/${DEPLOYMENT} fdc3-hackathon=${IMAGE_TAG}
           kubectl rollout status deployment/${DEPLOYMENT}
