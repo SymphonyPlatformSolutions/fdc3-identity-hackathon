@@ -322,7 +322,7 @@
 
 "@finos/fdc3@^2.0.1":
   version "2.0.1"
-  resolved "https://repo.symphony.com:443/artifactory/api/npm/npm-virtual-dev/@finos/fdc3/-/fdc3-2.0.1.tgz#553a367ced685f269233a89e9f9a505271556b97"
+  resolved "https://registry.yarnpkg.com/@finos/fdc3/-/fdc3-2.0.1.tgz#553a367ced685f269233a89e9f9a505271556b97"
   integrity sha512-BdfTPFQKYjwTaPNHavhwmA/be4+zg/4265DAx0DoasCjnlhvLA8WB9IIJZheXTYtevE3KvGNsFTo52yYzVF3Jg==
 
 "@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
@@ -431,7 +431,7 @@ chalk@^2.0.0:
 
 classnames@^2.3.2:
   version "2.3.2"
-  resolved "https://repo.symphony.com:443/artifactory/api/npm/npm-virtual-dev/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
 color-convert@^1.9.0:
@@ -649,9 +649,9 @@ update-browserslist-db@^1.0.10:
     picocolors "^1.0.0"
 
 vite@^4.3.3:
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.3.tgz#26adb4aa01439fc4546c480ea547674d87289396"
-  integrity sha512-MwFlLBO4udZXd+VBcezo3u8mC77YQk+ik+fbc0GZWGgzfbPP+8Kf0fldhARqvSYmtIWoAJ5BXPClUbMTlqFxrA==
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.4.tgz#1c518d763d5a700d890c3a19ab59220f06e7a7d5"
+  integrity sha512-f90aqGBoxSFxWph2b39ae2uHAxm5jFBBdnfueNxZAT1FTpM13ccFQExCaKbR2xFW5atowjleRniQ7onjJ22QEg==
   dependencies:
     esbuild "^0.17.5"
     postcss "^8.4.23"
