@@ -15,10 +15,7 @@ jobs:
           node-version: 18
           cache: 'yarn'
           cache-dependency-path: web/yarn.lock
-          registry-url: https://repo.symphony.com/artifactory/api/npm/npm-virtual-dev
-          _auth: "YW50b2luZS5yb2xsaW5Ac3ltcGhvbnkuY29tOkFLQ3A4aWdncGUxeWFzaFQyV0tMZnhMSlkxRHVtS05kRzJyQXYxcnRBckZrYzhzaEtSa1JNOThzRHpuVkV3TDhKNVQzdkFWVTc="
-          always-auth: true
-          email: warcicd@symphony.com
+          registry-url: registry=https://registry.npmjs.org/
 
       - run: cd web && yarn install && yarn build && cp -r dist ../src/main/resources/static/
 
