@@ -1,12 +1,9 @@
 plugins {
-	id 'java'
-	alias(libs.plugins.lombok)
-	alias(libs.plugins.springboot)
-	alias(libs.plugins.springboot.bom)
+    id 'org.springframework.boot' version '3.0.2'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'io.freefair.lombok' version '6.6.1'
+    id 'java'
 }
-
-group = 'org.finos.hackathon'
-version = '0.0.1'
 
 java {
     toolchain {
@@ -14,39 +11,22 @@ java {
     }
 }
 repositories {
-	mavenCentral()
-}
-
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
+    mavenCentral()
 }
 
 dependencies {
     implementation libs.jjwt
     runtimeOnly libs.jjwtImpl
     runtimeOnly libs.jjwtJackson
-    implementation 'org.springframework.boot:spring-boot'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'commons-io:commons-io:2.11.0'
 
     testImplementation testLibs.bundles.junit
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-bootJar {
-    classifier = 'boot'
-}
+tasks.named("jar") {enabled = false }
 
-jar {
-    enabled = false
-}
-
-test {
-    useJUnitPlatform()
-}
-
+tasks.withType(Test).configureEach { useJUnitPlatform() }

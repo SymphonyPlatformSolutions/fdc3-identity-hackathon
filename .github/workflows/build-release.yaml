@@ -2,8 +2,7 @@ name: Build and Release
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   build:
@@ -11,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-#      - uses: actions/setup-node@v3
-#        with:
-#          node-version: 18
-#          cache: 'yarn'
-#          cache-dependency-path: web/yarn.lock
-#
-#      - run: cd web && yarn install && yarn build && cp -r dist ../src/main/resources/static/
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+          cache-dependency-path: web/yarn.lock
+
+      - run: cd web && yarn install && yarn build && cp -r dist ../src/main/resources/static/
 
       - uses: actions/setup-java@v3
         with:
@@ -90,8 +89,3 @@ jobs:
         run: |
           kubectl set image deployment/${DEPLOYMENT} fdc3-hackathon=${IMAGE_TAG}
           kubectl rollout status deployment/${DEPLOYMENT}
-      - uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.tag.outputs.new_tag }}
-          makeLatest: true
-          generateReleaseNotes: true
