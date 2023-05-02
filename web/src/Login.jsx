@@ -28,7 +28,7 @@ function Login({ onSuccess }) {
   const getSymphonyIdentity = async () => {
     try {
       setState(States.FETCH_IDENTITY_SYMPHONY);
-      const resolution = await window.fdc3.raiseIntent("GetIdentity", {});
+      const resolution = await window.fdc3.raiseIntent("GetIdentity", { type: "fdc3.get.identity" });
       const result = await resolution.getResult();
       return result.jwt;
     } catch (error) {

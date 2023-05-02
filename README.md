@@ -49,14 +49,6 @@ going to be deployed on GCP under platform solutions project, labs kub cluster.
       ],
       "interop": {
         "intents": {
-          "listensFor": {
-            "GetIdentityResponse": {
-              "contexts": [
-                "fdc3.get.identity.response"
-              ],
-              "displayName": "Get Identity Response"
-            }
-          },
           "raises": {
             "GetIdentity": {
               "contexts": [
