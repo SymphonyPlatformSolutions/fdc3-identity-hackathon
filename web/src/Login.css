@@ -11,7 +11,7 @@
 .login-page-container.success {
     background-color: #0d2217;
 
-    animation: fade-out 3s linear infinite;
+    animation: fade-out 3.5s linear infinite;
 }
 
 .login-page-container.error {
