@@ -31,7 +31,7 @@ function Login({ onSuccess }) {
 
     try {
       console.log("Raising GetIdentity intent...");
-      window.fdc3.raiseIntent(
+      const resolution = await window.fdc3.raiseIntent(
         "GetIdentity",
         {
           type: "fdc3.get.identity",
@@ -40,6 +40,13 @@ function Login({ onSuccess }) {
           },
         }
       );
+
+      try {
+        const result = await resolution.getResult();
+        console.log('GetIdentity result', result);
+      } catch (err) {
+        console.error(err.toString());
+      }
     } catch (error) {
       handleError(error);
     }
@@ -86,6 +93,8 @@ function Login({ onSuccess }) {
   }
 
   const onNotifyIdentity = async (context) => {
+    console.log("NotifyIdentity intent received", context);
+
     if (!context?.id?.jwt) {
       handleError(new Error("The NotifyIdentity does not include any jwt"));
       return;
