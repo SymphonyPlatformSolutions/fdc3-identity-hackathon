@@ -11,3 +11,7 @@
 #perspective {
     flex: 1 1 1px;
 }
+
+#perspective td {
+    cursor: pointer
+}
