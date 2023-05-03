@@ -1,0 +1,13 @@
+@import '@finos/perspective-viewer/dist/css/pro-dark.css';
+
+.portfolio-container {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#perspective {
+    flex: 1 1 1px;
+}

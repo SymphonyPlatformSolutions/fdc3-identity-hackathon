@@ -12,7 +12,7 @@ const States = {
 
 const VALIDATE_TOKEN_URL = window.origin + "/fdc3/v1/auth/jwt";
 
-const REDIRECTION_DELAY = 3; // seconds 
+const REDIRECTION_DELAY = 3; // seconds
 
 function Login({ onSuccess }) {
   const [state, setState] = useState();
@@ -128,26 +128,24 @@ function Login({ onSuccess }) {
           )}
         </form>
 
-        <div className='login-info'>
-          {!!state && state >= States.FETCH_IDENTITY_SYMPHONY && (
-            <>
-              <h3>
-                {renderStateIcon(States.FETCH_IDENTITY_SYMPHONY)}
-                Authentication through Symphony FDC3
-              </h3>
-              {state === States.FETCH_IDENTITY_SYMPHONY && (<p>Please authorize the connection from your Symphony application</p>)}
-            </>
-          )}
-          {!!state && state >= States.VALIDATE_IDENTITY && (
+        {!!state && state >= States.FETCH_IDENTITY_SYMPHONY && (
+        <>
             <h3>
-              {renderStateIcon(States.VALIDATE_IDENTITY)}
-              Validation of Symphony identity
+            {renderStateIcon(States.FETCH_IDENTITY_SYMPHONY)}
+            Authentication through Symphony FDC3
             </h3>
-          )}
-        </div>
+            {state === States.FETCH_IDENTITY_SYMPHONY && (<p>Please authorize the connection from your Symphony application</p>)}
+        </>
+        )}
+        {!!state && state >= States.VALIDATE_IDENTITY && (
+        <h3>
+            {renderStateIcon(States.VALIDATE_IDENTITY)}
+            Validation of Symphony identity
+        </h3>
+        )}
 
         {!!errorMessage && (
-          <button type="button" onClick={() => { setErrorMessage(undefined); setState(undefined) }}>Retry</button>
+          <button type="button" style={{ 'align-self': 'flex-start' }} onClick={() => { setErrorMessage(undefined); setState(undefined) }}>Retry</button>
         )}
       </div>
     </div>
@@ -155,4 +153,3 @@ function Login({ onSuccess }) {
 }
 
 export default Login;
-
