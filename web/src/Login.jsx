@@ -31,7 +31,11 @@ function Login({ onSuccess }) {
 
     try {
       console.log("Raising GetIdentity intent...");
-      const resolution = await window.fdc3.raiseIntent("GetIdentity", { type: "fdc3.get.identity", id: { appName: "FDC3 Share Identity" } });
+      const resolution = await window.fdc3.raiseIntent(
+        "GetIdentity", 
+        { type: "fdc3.get.identity", id: { appName: "FDC3 Share Identity" }, },
+        { appId: "symphony" }
+      );
       const result = await resolution.getResult();
       console.log("Intent response received:", JSON.stringify(result));
 
@@ -129,19 +133,19 @@ function Login({ onSuccess }) {
         </form>
 
         {!!state && state >= States.FETCH_IDENTITY_SYMPHONY && (
-        <>
+          <>
             <h3>
-            {renderStateIcon(States.FETCH_IDENTITY_SYMPHONY)}
-            Authentication through Symphony FDC3
+              {renderStateIcon(States.FETCH_IDENTITY_SYMPHONY)}
+              Authentication through Symphony FDC3
             </h3>
             {state === States.FETCH_IDENTITY_SYMPHONY && (<p>Please authorize the connection from your Symphony application</p>)}
-        </>
+          </>
         )}
         {!!state && state >= States.VALIDATE_IDENTITY && (
-        <h3>
+          <h3>
             {renderStateIcon(States.VALIDATE_IDENTITY)}
             Validation of Symphony identity
-        </h3>
+          </h3>
         )}
 
         {!!errorMessage && (
