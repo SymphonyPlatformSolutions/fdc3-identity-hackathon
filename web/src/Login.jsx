@@ -80,16 +80,6 @@ function Login({ onSuccess }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     getSymphonyIdentity();
-
-    const userContext = await validateJwt(jwt);
-
-    if (userContext) {
-      setState(States.SUCCESS);
-
-      setTimeout(() => {
-        onSuccess(userContext);
-      }, REDIRECTION_DELAY * 1000);
-    }
   }
 
   const onNotifyIdentity = async (context) => {
