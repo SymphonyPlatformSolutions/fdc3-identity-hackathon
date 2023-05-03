@@ -10,9 +10,9 @@ class JwtValidatorTest {
   @Test
   void validateJwt() {
     final String jwt =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0ZXN0IjoyfQ.dEHiqvpIWH7WDBumDsAcLoxf_CBVTIhPe0nwgag54Dp5H3NnHY_av0KyLh0pXyXF02TeNa_6v6Eb6sh6eHKv1EbWzd96btakFmoSQ3UYCIdsAq9OLj9xTbOVLvPUtdwsUPcUnCabTuUtGCwJzW1d6Sp9EBpL2KNZK2GhMwh29fEMsZmWOE2zydR8deujz-A3PFob4zeQgpP5EKQ5mKzwU7mvl9nStS7XqdcTJtztv5WRTyGDDuia3dO43nPTam61bdQL2nRE441i_tbiEuqnx4eom3CiTej0dusowTSVsl8m0t3m4kxjeDERpynhhZ842iigDY7GYjm62IC3riYA2g";
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmaXJzdE5hbWUiOiJBbnRvaW5lIiwibGFzdE5hbWUiOiJSb2xsaW4iLCJleHAiOjE2ODMxMDU2MDMsImlhdCI6MTY4MzEwNTMwMywiZW1haWwiOiJhbnRvaW5lLnJvbGxpbkBzeW1waG9ueS5jb20ifQ.jd7B9tuiyQQu0MAubEr_uXzez42bMihvoSF2GMkOPnAHUbIWI3zzS1wQKfveXqH7W9A4WvqSfDi5pJ_44CnHbS-Hn7F0lAlGm2JTgaeefdXlN70Qpu4wV2cZqT0a5AIXSTRW4uZ_CEphQ8UuZohehucPe-DQfJX56Q6lhSy0EoTKxFhcP8y3sdJ16g1sUS32XxJlSWEYXGi0PpoWL-Z7SLBzeAm_aKWBAyKL5WtBPjNkCORa6Ml33FjQmdTnCvC5aqx9HCBzu0xj7Eo0r2pQvFZXhZAjw61ydJPqbe9q61uMWTBjKCwUu-BujxfpMfZawD2CegP2xGpj97JiE7Ypfw";
 
     Claims claims = JwtValidator.validateJwt(jwt);
-    assertThat(claims).containsKey("test");
+    assertThat(claims).containsKey("email");
   }
 }
