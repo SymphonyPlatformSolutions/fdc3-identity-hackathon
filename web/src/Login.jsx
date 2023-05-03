@@ -31,7 +31,7 @@ function Login({ onSuccess }) {
 
     try {
       console.log("Raising GetIdentity intent...");
-      const resolution = await window.fdc3.raiseIntent("GetIdentity", { type: "fdc3.get.identity" });
+      const resolution = await window.fdc3.raiseIntent("GetIdentity", { type: "fdc3.get.identity", id: { appName: "FDC3 Share Identity" } });
       const result = await resolution.getResult();
       console.log("Intent response received:", JSON.stringify(result));
 
