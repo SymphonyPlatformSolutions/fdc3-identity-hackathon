@@ -1,8 +1,6 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./Login.css";
-
-const MOCK_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ0ZXN0IjoyfQ.dEHiqvpIWH7WDBumDsAcLoxf_CBVTIhPe0nwgag54Dp5H3NnHY_av0KyLh0pXyXF02TeNa_6v6Eb6sh6eHKv1EbWzd96btakFmoSQ3UYCIdsAq9OLj9xTbOVLvPUtdwsUPcUnCabTuUtGCwJzW1d6Sp9EBpL2KNZK2GhMwh29fEMsZmWOE2zydR8deujz-A3PFob4zeQgpP5EKQ5mKzwU7mvl9nStS7XqdcTJtztv5WRTyGDDuia3dO43nPTam61bdQL2nRE441i_tbiEuqnx4eom3CiTej0dusowTSVsl8m0t3m4kxjeDERpynhhZ842iigDY7GYjm62IC3riYA2g";
 
 const States = {
   FETCH_IDENTITY_SYMPHONY: 1,
@@ -44,6 +42,8 @@ function Login({ onSuccess }) {
 
       const result = await resolution.getResult();
 
+      console.log('GetIdentity result', result);
+
       if (!result?.id?.jwt) {
         throw new Error("The FDC3 intent result does not contain any jwt");
       }
@@ -83,7 +83,7 @@ function Login({ onSuccess }) {
     event.preventDefault();
     const jwt = await getSymphonyIdentity();
 
-    if (!jwt){
+    if (!jwt) {
       return;
     }
 
@@ -97,31 +97,6 @@ function Login({ onSuccess }) {
       }, REDIRECTION_DELAY * 1000);
     }
   }
-
-  // const onNotifyIdentity = async (context) => {
-  //   console.log("NotifyIdentity intent received", context);
-
-  //   if (!context?.id?.jwt) {
-  //     handleError(new Error("The NotifyIdentity does not include any jwt"));
-  //     return;
-  //   }
-
-  //   const jwt = context.id.jwt;
-
-  //   const userContext = await validateJwt(jwt);
-
-  //   if (userContext) {
-  //     setState(States.SUCCESS);
-
-  //     setTimeout(() => {
-  //       onSuccess(userContext);
-  //     }, REDIRECTION_DELAY * 1000);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   window.fdc3?.addIntentListener('NotifyIdentity', onNotifyIdentity);
-  // }, []);
 
   const renderStateIcon = (targetState) => {
     if (state === targetState) {

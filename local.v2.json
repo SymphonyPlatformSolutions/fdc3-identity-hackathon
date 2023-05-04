@@ -531,7 +531,7 @@
       "description": "Symphony is the most secure and compliance-enabling markets’ infrastructure and technology platform, where solutions are built or integrated to standardize, automate and innovate financial services workflows. It is a vibrant community of over half a million financial professionals with a trusted directory and serves over 1,000 institutions.",
       "type": "web",
       "details": {
-        "url": "https://st3.symphony.com/apps/client2/PR-fdc3-hackathon?embed=true&container=true&mode=dark"
+        "url": "https://st3.symphony.com/apps/client2?embed=true&container=true&mode=dark"
       },
       "icons": [
         {
@@ -574,10 +574,6 @@
             "ViewInstrument": {
               "contexts": ["fdc3.instrument"],
               "displayName": "View Instrument"
-            },
-            "NotifyIdentity": {
-              "contexts": ["fdc3.notify.identity"],
-              "displayName": "Notify Identity"
             }
           }
         }
@@ -620,12 +616,6 @@
       ],
       "interop": {
         "intents": {
-          "listensFor": {
-            "NotifyIdentity": {
-              "contexts": ["fdc3.notify.identity"],
-              "displayName": "Notify Identity"
-            }
-          },
           "raises": {
             "GetIdentity": {
               "contexts": ["fdc3.get.identity"],
