@@ -9,23 +9,13 @@ const Portfolio = ({ userContext }) => {
     const worker = perspective.default.shared_worker();
     const viewer = useRef(null);
     const table = worker.table(data);
-
-    let clicks = 0;
     let loading = false;
-
-    const reset = () => setTimeout(() => {
-        clicks = 0;
-        loading = false;
-    }, 1000);
 
     useEffect(() => {
         viewer.current.load(table);
         viewer.current.restore({});
         viewer.current.addEventListener('perspective-click', (event) => {
-            if (clicks < 2) {
-                clicks++;
-                reset();
-            } else if (!loading) {
+            if (!loading) {
                 loading = true;
                 const ticker = event.detail.row.Ticker;
                 const name = event.detail.row.Name;
@@ -33,14 +23,15 @@ const Portfolio = ({ userContext }) => {
                     type: 'fdc3.instrument',
                     name,
                     id: { ticker },
+                    userContext,
                 });
-                reset();
+                loading = false;
             }
         });
     }, []);
 
     const displayName = userContext ?
-        `${userContext.firstName} ${userContext.lastName}` : 'Josh Doe';
+        `${userContext.context.firstName} ${userContext.context.lastName}` : 'Josh Doe';
 
     return (
         <div className="portfolio-container">

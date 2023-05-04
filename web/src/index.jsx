@@ -1,11 +1,18 @@
+import './index.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import Transactions from './Transactions';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+        <Routes>
+            <Route path="/fdc3/" element={<App />} />
+            <Route path="/fdc3/tx" element={<Transactions />} />
+        </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );

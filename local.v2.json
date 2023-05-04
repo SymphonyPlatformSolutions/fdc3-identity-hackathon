@@ -625,7 +625,7 @@
         }
       },
       "moreInfo": "https://symphony.com/",
-      "name": "FDC3 Share Identity",
+      "name": "CleverTrade Portfolio",
       "publisher": "Symphony Communication Services, LLC",
       "screenshots": [
         {
@@ -644,7 +644,51 @@
         }
       },
       "supportEmail": "support@symphony.com",
-      "title": "FDC3 Share Identity"
+      "title": "CleverTrade Portfolio"
+    },
+    {
+      "appId": "fdc3-share-identity-tx",
+      "categories": ["chat", "communication", "compliance", "productivity"],
+      "contactEmail": "sales@symphony.com",
+      "description": "Load your business environment through Symphony FDC3.",
+      "type": "web",
+      "details": {
+        "url": "https://labs.symphonymarket.solutions/fdc3/tx"
+      },
+      "icons": [
+        {
+          "src": "https://fdc3.finos.org/img/users/Symphony.png"
+        }
+      ],
+      "interop": {
+        "intents": {
+          "listensFor": {
+            "ViewChart": {
+              "displayName": "View Chart",
+              "contexts": ["fdc3.instrument"]
+            }
+          }
+        }
+      },
+      "moreInfo": "https://symphony.com/",
+      "name": "CleverTrade Transactions",
+      "publisher": "Symphony Communication Services, LLC",
+      "screenshots": [
+        {
+          "src": "https://symphony.com/wp-content/uploads/2021/09/SYM-Hero-with-C9-1-2048x1688.png"
+        }
+      ],
+      "hostManifests": {
+        "sail": {
+          "injectApi": "2.0",
+          "framesApi": false,
+          "allowedOrigins": [
+            "https://labs.symphonymarket.solutions"
+          ]
+        }
+      },
+      "supportEmail": "support@symphony.com",
+      "title": "CleverTrade Transactions"
     },
     {
       "appId": "CleverDeal",

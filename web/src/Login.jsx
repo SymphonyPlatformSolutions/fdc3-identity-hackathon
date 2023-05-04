@@ -93,7 +93,7 @@ function Login({ onSuccess }) {
       setState(States.SUCCESS);
 
       setTimeout(() => {
-        onSuccess(userContext);
+        onSuccess({ jwt, context: userContext });
       }, REDIRECTION_DELAY * 1000);
     }
   }
@@ -152,7 +152,7 @@ function Login({ onSuccess }) {
         )}
 
         {!!errorMessage && (
-          <button type="button" style={{ 'align-self': 'flex-start' }} onClick={() => { setErrorMessage(undefined); setState(undefined) }}>Retry</button>
+          <button type="button" style={{ alignSelf: 'flex-start' }} onClick={() => { setErrorMessage(undefined); setState(undefined) }}>Retry</button>
         )}
       </div>
     </div>
