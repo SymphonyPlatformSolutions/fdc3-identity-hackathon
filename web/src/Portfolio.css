@@ -15,3 +15,8 @@
 #perspective td {
     cursor: pointer
 }
+
+table { border-collapse: collapse }
+th { text-align: left }
+tr:not(:first-child):hover { background-color: #47576e }
+td { padding: 0.3rem }
