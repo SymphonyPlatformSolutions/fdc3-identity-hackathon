@@ -31,15 +31,24 @@ function Login({ onSuccess }) {
 
     try {
       console.log("Raising GetIdentity intent...");
-      window.fdc3.raiseIntent(
+      const resolution = await window.fdc3.raiseIntent(
         "GetIdentity",
         {
           type: "fdc3.get.identity",
           id: {
             appName: "FDC3 Share Identity"
           },
-        }
+        },
+        'symphony',
       );
+
+      const result = await resolution.getResult();
+
+      if (!result?.id?.jwt) {
+        throw new Error("The FDC3 intent result does not contain any jwt");
+      }
+
+      return result.id.jwt;
     } catch (error) {
       handleError(error);
     }
@@ -72,18 +81,11 @@ function Login({ onSuccess }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    getSymphonyIdentity();
-  }
+    const jwt = await getSymphonyIdentity();
 
-  const onNotifyIdentity = async (context) => {
-    console.log("NotifyIdentity intent received", context);
-
-    if (!context?.id?.jwt) {
-      handleError(new Error("The NotifyIdentity does not include any jwt"));
+    if (!jwt){
       return;
     }
-
-    const jwt = context.id.jwt;
 
     const userContext = await validateJwt(jwt);
 
@@ -96,9 +98,30 @@ function Login({ onSuccess }) {
     }
   }
 
-  useEffect(() => {
-    window.fdc3?.addIntentListener('NotifyIdentity', onNotifyIdentity);
-  }, []);
+  // const onNotifyIdentity = async (context) => {
+  //   console.log("NotifyIdentity intent received", context);
+
+  //   if (!context?.id?.jwt) {
+  //     handleError(new Error("The NotifyIdentity does not include any jwt"));
+  //     return;
+  //   }
+
+  //   const jwt = context.id.jwt;
+
+  //   const userContext = await validateJwt(jwt);
+
+  //   if (userContext) {
+  //     setState(States.SUCCESS);
+
+  //     setTimeout(() => {
+  //       onSuccess(userContext);
+  //     }, REDIRECTION_DELAY * 1000);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   window.fdc3?.addIntentListener('NotifyIdentity', onNotifyIdentity);
+  // }, []);
 
   const renderStateIcon = (targetState) => {
     if (state === targetState) {
