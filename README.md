@@ -4,6 +4,7 @@
 
 - Spring boot 3.0.6
 - JDK 17
+- ReactJS
 
 ## BE Jwt validation endpoint
 
@@ -16,15 +17,47 @@ POST /fdc3/v1/auth/jwt
 ```
 
 Response
-  - 200: jwt is valid, with UserClaim payload
-  - 400: jwt is not valid, bad request
-  - 500: server error
 
-## Deployment
+- 200: jwt is valid, with UserClaim payload
+- 400: jwt is not valid, bad request
+- 500: server error
 
-Each push will trigger the github action, the new generated docker image is
-going to be deployed on GCP under platform solutions project, labs kub cluster.
+## Configuration
 
-## Sail config
+### Sail application
 
-See `local.v2.json` in the repo.
+- clone the Sail app locally: https://github.com/finos/FDC3-Sail
+- take the `local.v2.json` file from this project and paste it in the Sail `/directory` folder
+- in `local.v2.json`:
+- - for the `fdc3-share-identity` app, update the `details.url` with the application URL
+- - for the `symphony` app: 
+- - - update the `details.url` with your target Symphony pod URL
+- - - add also this URL to the `hostManifests.sail.allowedOrigins`
+
+### CleverTrade server
+
+TODO: conf update ?
+
+### CleverTrade application
+
+Replace the `VALIDATE_TOKEN_URL` variable in `web/Login.jsx` with the value of the server URL.
+
+### Scenario
+
+- start the FDC3 Sail app with:
+```sh
+npm install
+export SAIL_DIRECTORY_URL=directory/local.v2.json
+npm start
+```
+
+- from Sail, open the Symphony app (for now it's pointing at st3 pod)
+- log in with an account
+- open the CleverTrade Portfolio app
+- click the Login button (it opens the Symphony app with the previously logged in user)
+- click "Accept" form the dialog that appeared on the Symphony app
+- focus the CleverTrade Portfolio app, it should show success statuses for all steps and redirect to the custom portfolio view
+
+
+
+
