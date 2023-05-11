@@ -3,9 +3,7 @@ package org.finos.hackathon;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
@@ -19,15 +17,12 @@ public class JwtValidator {
   private static final String PEM_PUB_START = "-----BEGIN PUBLIC KEY-----";
   private static final String PEM_PUB_END = "-----END PUBLIC KEY-----";
 
-  public static Claims validateJwt(String jwt) {
+  public static Claims validateJwt(String jwt, String pubKeyString) {
     try {
-      String pemString = IOUtils.resourceToString("/pubKey.pem", StandardCharsets.UTF_8);
-      PublicKey pubKey = parsePubKey(pemString);
+      PublicKey pubKey = parsePubKey(pubKeyString);
       return Jwts.parserBuilder().setSigningKey(pubKey).build().parseClaimsJws(jwt).getBody();
     } catch (GeneralSecurityException | JwtException exception) {
       throw new AuthException("Unable to validate JWT", exception);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
     }
   }
 
@@ -45,6 +40,5 @@ public class JwtValidator {
       throw new GeneralSecurityException("Unable to parse the pem public key.", e);
     }
   }
-
 
 }
