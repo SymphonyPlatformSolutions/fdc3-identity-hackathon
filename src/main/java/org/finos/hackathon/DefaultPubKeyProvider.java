@@ -9,7 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-@Service
+//@Service
 @Slf4j
 public class DefaultPubKeyProvider implements PubKeyProvider {
   private final String pubKeyUri;
