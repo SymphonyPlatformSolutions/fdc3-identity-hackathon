@@ -1,5 +1,5 @@
 app:
-  pod-uri: https://develop2.symphony.com
+  pod-uri: https://st3.symphony.com
 
 server.servlet.contextPath: /fdc3
 spring.banner.location: classpath:finos-hackathon-banner.txt
